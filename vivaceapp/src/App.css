@@ -96,7 +96,7 @@ body {
   justify-content: center;
   padding: 1rem 2.5rem;
   /* More horizontal padding */
-  background-image: linear-gradient(to right, #2a63ad, #3399ff);
+  background-image: linear-gradient(to right, #2a63ad, #287acc);
   /* Professional blue gradient */
   color: white;
   font-size: 1.15rem;
@@ -112,10 +112,12 @@ body {
   outline: none;
   letter-spacing: 0.025em;
   /* Slight letter spacing */
+  /* --- NEW: Center the button --- */
+  margin: 0 auto;
 }
 
 .start-quest-button:hover {
-  background-image: linear-gradient(to right, #1e5192, #297acc);
+  background-image: linear-gradient(to right, #287acc, #2a63ad);
   /* Darker blue on hover */
   transform: scale(1.03);
   /* Subtle hover scale */
@@ -180,9 +182,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem 2.5rem;
-  background-image: linear-gradient(to right, #ffd700, #ffc107);
+  background-image: linear-gradient(to right, #d8b907, #d8a305);
   /* Professional gold gradient */
-  color: #2a63ad;
+  color: #1c457a;
   /* Blue text on gold button */
   font-size: 1.15rem;
   font-weight: 600;
