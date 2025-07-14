@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  /* A very light grey for body background */
+}
+
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  /* Slightly increased padding */
+  box-sizing: border-box;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Slightly darker overlay for better contrast */
+}
+
+.content-container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: #ffffff;
+  /* Pure white for main text */
+  padding: 3rem;
+  /* Increased padding for more breathing room */
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+  /* Softer, more pronounced shadow */
+  backdrop-filter: blur(8px);
+  /* Increased blur for a smoother frosted glass effect */
+  background-color: rgba(255, 255, 255, 0.15);
+  /* Slightly less transparent white background */
+  max-width: 36rem;
+  /* Slightly wider content container */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-title {
+  font-size: 3.25rem;
+  /* Refined font size */
+  font-weight: 700;
+  /* Bolder for impact */
+  margin-bottom: 1rem;
+  /* Slightly reduced margin */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Softer text shadow */
+  line-height: 1.2;
+  color: #ffffff;
+  /* Ensure title is white */
+}
+
+@media (min-width: 768px) {
+  .main-title {
+    font-size: 4rem;
+    /* Larger on desktop */
+  }
+}
+
+.subtitle {
+  font-size: 1.35rem;
+  /* Refined font size */
+  margin-bottom: 2.5rem;
+  /* Increased margin for subtitle */
+  font-weight: 400;
+  /* Lighter weight for balance */
+  color: #e0e0e0;
+  /* Off-white for subtitle */
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 1.65rem;
+  }
+}
+
+.start-quest-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  /* More horizontal padding */
+  background-image: linear-gradient(to right, #2a63ad, #3399ff);
+  /* Professional blue gradient */
+  color: white;
+  font-size: 1.15rem;
+  /* Slightly smaller font for professionalism */
+  font-weight: 600;
+  border-radius: 9999px;
+  box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  /* Refined shadow */
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  letter-spacing: 0.025em;
+  /* Slight letter spacing */
+}
+
+.start-quest-button:hover {
+  background-image: linear-gradient(to right, #1e5192, #297acc);
+  /* Darker blue on hover */
+  transform: scale(1.03);
+  /* Subtle hover scale */
+}
+
+.start-quest-button:focus {
+  box-shadow: 0 0 0 5px rgba(51, 153, 255, 0.5);
+  /* Blue focus ring */
+}
+
+.icon {
+  margin-right: 0.8rem;
+  /* Adjusted margin */
+  height: 1.5rem;
+  /* Slightly smaller icon */
+  width: 1.5rem;
+}
+
+.email-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  /* Increased gap */
+}
+
+.email-input {
+  width: 100%;
+  max-width: 25rem;
+  /* Max width for input for better visual balance */
+  padding: 1.1rem;
+  /* Slightly more padding */
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  /* Less transparent for better readability */
+  color: white;
+  font-size: 1rem;
+  /* Standard font size */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* Subtle border */
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.email-input::placeholder {
+  color: #c9d6e5;
+  /* Lighter placeholder color */
+}
+
+.email-input:focus {
+  box-shadow: 0 0 0 3px #ffd700;
+  /* Gold focus ring */
+  background-color: rgba(255, 255, 255, 0.35);
+  /* Slightly more opaque on focus */
+}
+
+.join-button {
+  width: 100%;
+  max-width: 25rem;
+  /* Match input max width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  background-image: linear-gradient(to right, #ffd700, #ffc107);
+  /* Professional gold gradient */
+  color: #2a63ad;
+  /* Blue text on gold button */
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  letter-spacing: 0.025em;
+}
+
+.join-button:hover {
+  background-image: linear-gradient(to right, #e6b800, #e0a800);
+  /* Darker gold on hover */
+  transform: scale(1.03);
+}
+
+.join-button:focus {
+  box-shadow: 0 0 0 5px rgba(255, 215, 0, 0.5);
+  /* Gold focus ring */
+}
+
+.message {
+  margin-top: 2rem;
+  /* Increased margin for message */
+  font-size: 1.05rem;
+  /* Slightly smaller font */
+  font-weight: 500;
+  color: #ffd700;
+  /* Gold color for messages */
+  line-height: 1.4;
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
