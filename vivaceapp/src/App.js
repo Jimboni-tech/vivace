@@ -8,23 +8,7 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  // Placeholder for supabase client if not imported from supabaseClient.js
-  // In a real application, ensure supabase is correctly initialized and imported.
-  const supabase = {
-    from: (tableName) => ({
-      insert: async (data) => {
-        console.log(`Simulating Supabase insert into '${tableName}' with data:`, data);
-        // Simulate a successful insert after a short delay
-        return new Promise(resolve => setTimeout(() => {
-          if (data[0].email === 'error@example.com') { // Simulate an error for testing
-            resolve({ data: null, error: { message: 'Simulated database error' } });
-          } else {
-            resolve({ data: data, error: null });
-          }
-        }, 500));
-      }
-    })
-  };
+
 
 
   const backgroundImage = "/vivace-background.png"; // Placeholder image URL
