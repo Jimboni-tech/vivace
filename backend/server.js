@@ -17,7 +17,7 @@ app.use(express.json());
 // Enable CORS for your frontend
 // IMPORTANT: In production, replace '*' with your actual frontend domain (e.g., 'https://your-frontend-domain.com')
 app.use(cors({
-  origin: 'http://localhost:3000' // Allow requests from your React frontend
+  origin: process.env.PORT // Allow requests from your React frontend
 }));
 
 // Define your email sending endpoint
