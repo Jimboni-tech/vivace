@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
+import { supabase } from './supabaseClient';
+
 const App = () => {
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [email, setEmail] = useState('');
@@ -9,17 +11,26 @@ const App = () => {
 
   const handleStartQuestClick = () => {
     setShowEmailInput(true);
-    setMessage(''); 
+    setMessage('');
   };
 
-  const handleSubmitEmail = (e) => {
+  const handleSubmitEmail = async (e) => {
     e.preventDefault();
     if (email) {
+      const { data, error } = await supabase
+        .from('emails') // Your table name
+        .insert([{ email: email }]);
 
-      console.log('Email submitted:', email);
-      setMessage(`Thanks for joining the quest, ${email}! We'll be in touch soon.`);
-      setEmail(''); 
-      setShowEmailInput(false); 
+      if (error) {
+        // --- IMPORTANT: Log the error object here ---
+        console.error('Supabase insert error:', error);
+        setMessage('Oops! Something went wrong. Please try again.');
+      } else {
+        console.log('Email submitted:', email);
+        setMessage(`Thanks for joining the quest, ${email}! We'll be in touch soon.`);
+        setEmail('');
+        setShowEmailInput(false);
+      }
     } else {
       setMessage('Please enter your email address.');
     }
@@ -47,7 +58,6 @@ const App = () => {
             onClick={handleStartQuestClick}
             className="start-quest-button"
           >
-            
             Start Quest
           </button>
         ) : (
@@ -75,7 +85,6 @@ const App = () => {
           </p>
         )}
       </div>
-
     </div>
   );
 };

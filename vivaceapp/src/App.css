@@ -29,7 +29,7 @@ body {
 .overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
   /* Slightly darker overlay for better contrast */
 }
 
@@ -66,10 +66,10 @@ body {
   /* Bolder for impact */
   margin-bottom: 1rem;
   /* Slightly reduced margin */
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7), 0 0 8px rgba(255, 255, 255, 0.5);
   /* Glowing text shadow */
   line-height: 1.2;
-  color: #ffffff;
+  color: #f1f1f1;
   /* Ensure title is white */
 }
 
