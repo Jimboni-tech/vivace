@@ -1,10 +1,21 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Doppio+One&family=MedievalSharp&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;700&display=swap');
 
-
+html,
+body {
+  height: 100%;
+  /* Ensure html and body take full viewport height */
+  width: 100%;
+  /* Ensure html and body take full viewport width */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Prevent horizontal scrolling */
+  /* Add this to ensure consistent height on mobile browsers */
+  min-height: -webkit-fill-available;
+}
 
 body {
-  margin: 0;
   font-family: "MedievalSharp", cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -15,6 +26,11 @@ body {
 .app-container {
   position: relative;
   min-height: 100vh;
+  /* Use min-height for content expansion */
+  height: 100%;
+  /* Ensure it tries to fill the height */
+  width: 100%;
+  /* Ensure it tries to fill the width */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -25,6 +41,15 @@ body {
   /* Slightly increased padding */
   box-sizing: border-box;
 }
+
+/* Adjust app-container padding for very small screens to ensure no overflow */
+@media (max-width: 480px) {
+  .app-container {
+    padding: 0.5rem;
+    /* Reduce padding further on very small screens */
+  }
+}
+
 
 .overlay {
   position: absolute;
@@ -53,8 +78,47 @@ body {
   max-width: 36rem;
   /* Slightly wider content container */
   width: 100%;
+  /* Ensure it takes full width within its parent's padding */
   margin-left: auto;
   margin-right: auto;
+  box-sizing: border-box;
+  /* Ensure padding is included in the width */
+}
+
+/* Responsive adjustments for content-container padding */
+@media (max-width: 767px) {
+
+  /* Adjust padding for smaller screens */
+  .content-container {
+    padding: 1.5rem;
+    /* Reduced padding for mobile */
+  }
+}
+
+/* Further adjust content-container max-width and padding for very small screens */
+@media (max-width: 480px) {
+  .content-container {
+    max-width: 95%;
+    /* Allow it to take more width on very small screens, creating a small margin */
+    padding: 1rem;
+    /* Even smaller padding for very tight spaces */
+    margin: 0 auto;
+    /* Explicitly center on very small screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .content-container {
+    max-width: 42rem;
+    /* md:max-w-2xl */
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-container {
+    max-width: 48rem;
+    /* lg:max-w-3xl */
+  }
 }
 
 .main-title {
@@ -66,11 +130,28 @@ body {
   /* Bolder for impact */
   margin-bottom: 1rem;
   /* Slightly reduced margin */
-  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7), 0 0 8px rgba(255, 255, 255, 0.5);
-  /* Glowing text shadow */
   line-height: 1.2;
   color: #f1f1f1;
   /* Ensure title is white */
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7), 0 0 8px rgba(255, 255, 255, 0.5);
+  /* Glowing text shadow */
+}
+
+@media (max-width: 767px) {
+
+  /* Adjust font size for smaller screens */
+  .main-title {
+    font-size: 2.5rem;
+    /* Smaller font size for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Even smaller font size for very small screens */
+  .main-title {
+    font-size: 2rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -93,6 +174,23 @@ body {
   /* Off-white for subtitle */
 }
 
+@media (max-width: 767px) {
+
+  /* Adjust font size for smaller screens */
+  .subtitle {
+    font-size: 1.1rem;
+    /* Smaller font size for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Even smaller font size for very small screens */
+  .subtitle {
+    font-size: 0.95rem;
+  }
+}
+
 @media (min-width: 768px) {
   .subtitle {
     font-size: 1.65rem;
@@ -112,6 +210,7 @@ body {
   /* Slightly smaller font for professionalism */
   font-weight: 600;
   border-radius: 9999px;
+  /* Fully rounded */
   box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
   /* Refined shadow */
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -124,10 +223,25 @@ body {
   /* Slight letter spacing */
   margin: 0 auto;
   /* Center the button */
-
-  /* --- NEW: Floating animation --- */
   animation: float 3s ease-in-out infinite;
   /* Apply the float animation */
+  box-sizing: border-box;
+  /* Ensure padding is included in the width */
+  width: 100%;
+  /* Ensure it takes full width within its parent's padding */
+  max-width: 20rem;
+  /* Default max-width for buttons */
+}
+
+@media (max-width: 480px) {
+  .start-quest-button {
+    padding: 0.8rem 1.5rem;
+    /* Smaller padding for very small screens */
+    font-size: 1rem;
+    /* Smaller font size */
+    max-width: 90%;
+    /* Adjust max-width for proportionality */
+  }
 }
 
 .start-quest-button:hover {
@@ -144,14 +258,6 @@ body {
 .start-quest-button:focus {
   box-shadow: 0 0 0 5px rgba(51, 153, 255, 0.5);
   /* Blue focus ring */
-}
-
-.icon {
-  margin-right: 0.8rem;
-  /* Adjusted margin */
-  height: 1.5rem;
-  /* Slightly smaller icon */
-  width: 1.5rem;
 }
 
 .email-form {
@@ -178,6 +284,19 @@ body {
   /* Subtle border */
   outline: none;
   transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+  /* Ensure padding is included in the width */
+}
+
+@media (max-width: 480px) {
+  .email-input {
+    padding: 0.8rem;
+    /* Smaller padding for very small screens */
+    font-size: 0.9rem;
+    /* Smaller font size */
+    max-width: 90%;
+    /* Adjust max-width for proportionality */
+  }
 }
 
 .email-input::placeholder {
@@ -207,6 +326,7 @@ body {
   font-size: 1.15rem;
   font-weight: 600;
   border-radius: 9999px;
+  /* Fully rounded */
   box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   transform: scale(1);
@@ -214,6 +334,21 @@ body {
   cursor: pointer;
   outline: none;
   letter-spacing: 0.025em;
+  box-sizing: border-box;
+  /* Ensure padding is included in the width */
+  max-width: 20rem;
+  /* Default max-width for buttons */
+}
+
+@media (max-width: 480px) {
+  .join-button {
+    padding: 0.8rem 1.5rem;
+    /* Smaller padding for very small screens */
+    font-size: 1rem;
+    /* Smaller font size */
+    max-width: 90%;
+    /* Adjust max-width for proportionality */
+  }
 }
 
 .join-button:hover {
@@ -254,7 +389,6 @@ body {
   animation: fade-in-up 0.5s ease-out forwards;
 }
 
-/* --- NEW: Floating Keyframe Animation --- */
 @keyframes float {
   0% {
     transform: translateY(0px) scale(1);
