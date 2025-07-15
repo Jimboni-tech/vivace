@@ -37,40 +37,43 @@ const App = () => {
   const handleSubmitEmail = async (e) => {
     e.preventDefault();
     if (email) {
-      // Attempt to insert email into Supabase
+      // Attempt to insert email into Supabase (or your chosen database)
       const { data, error } = await supabase
-        .from('emails') // Your table name
+        .from('emails') // Your table name where emails are stored
         .insert([{ email: email }]);
 
       if (error) {
         console.error('Supabase insert error:', error);
-        setMessage('Oops! Something went wrong. Please try again.');
+        setMessage('Oops! Something went wrong with saving your email. Please try again.');
       } else {
-        console.log('Email submitted:', email);
+        console.log('Email submitted to database:', email);
 
-        // --- NEW FEATURE: Simulate sending a thank you email ---
-        // In a real application, you would trigger a server-side function (e.g., a Supabase Function,
-        // AWS Lambda, Google Cloud Function) here to send the email securely.
-        // This client-side console log is a simulation.
-        console.log(`Simulating sending a thank you email to: ${email}`);
-        // Example of how you might call a serverless function (conceptual):
-        /*
+        // --- FEATURE: Trigger real email sending via a backend endpoint ---
+        // IMPORTANT: Now pointing to your local backend URL.
         try {
-          const emailResponse = await fetch('/api/send-thank-you-email', {
+          const emailResponse = await fetch('https://vivace-smvk.onrender.com/api/send-thank-you-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ recipientEmail: email })
           });
+
           if (!emailResponse.ok) {
-            console.error('Failed to send thank you email:', await emailResponse.text());
+            // If the serverless function returns an error status
+            const errorText = await emailResponse.text();
+            console.error('Failed to send thank you email:', errorText);
+            setMessage(`Thanks for joining! There was an issue sending your confirmation email.`);
+          } else {
+            // Email sending request was successful
+            console.log(`Successfully triggered thank you email to: ${email}`);
+            setMessage(`Thanks for joining the quest, ${email}! A confirmation email has been sent.`);
           }
         } catch (emailError) {
-          console.error('Error sending thank you email:', emailError);
+          // Catch network errors or issues with the fetch call itself
+          console.error('Error triggering email sending:', emailError);
+          setMessage(`Thanks for joining! There was a network issue sending your confirmation email.`);
         }
-        */
-        // --- END NEW FEATURE ---
+        // --- END FEATURE ---
 
-        setMessage(`Thanks for joining the quest, ${email}! We'll be in touch soon.`);
         setEmail('');
         setShowEmailInput(false);
       }
