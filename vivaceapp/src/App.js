@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import './App.css'; // Uncomment if you have App.css
 import { supabase } from './supabaseClient'; // Uncomment if you have supabaseClient
 
+
 const App = () => {
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-
-
+  const [emailSubmitted, setEmailSubmitted] = useState(false); // New state to control post-submission view
 
 
   const backgroundImage = "/vivace-background.png"; // Placeholder image URL
@@ -16,6 +16,7 @@ const App = () => {
   const handleStartQuestClick = () => {
     setShowEmailInput(true);
     setMessage('');
+    setEmailSubmitted(false); // Reset if user somehow comes back to this state
   };
 
   const handleSubmitEmail = async (e) => {
@@ -29,12 +30,18 @@ const App = () => {
       if (error) {
         console.error('Supabase insert error:', error);
         setMessage('Oops! Something went wrong with saving your email. Please try again.');
+        setEmailSubmitted(false); // Keep form visible on error if DB save fails
       } else {
         console.log('Email submitted to database:', email);
+        setEmail(''); // Clear the email input
+        setShowEmailInput(false); // Hide the email input form
+        setEmailSubmitted(true); // Set state to indicate email was submitted successfully to DB
 
         // --- FEATURE: Trigger real email sending via a backend endpoint ---
         // IMPORTANT: Now pointing to your local backend URL.
         try {
+          // Using a placeholder URL for the backend API.
+          // In a real scenario, replace this with your actual backend endpoint.
           const emailResponse = await fetch('https://vivace-smvk.onrender.com/api/send-thank-you-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -57,12 +64,10 @@ const App = () => {
           setMessage(`Thanks for joining! There was a network issue sending your confirmation email.`);
         }
         // --- END FEATURE ---
-
-        setEmail('');
-        setShowEmailInput(false);
       }
     } else {
       setMessage('Please enter your email address.');
+      setEmailSubmitted(false); // Keep form visible if email is empty
     }
   };
 
@@ -83,31 +88,34 @@ const App = () => {
           Get early access today!
         </p>
 
-        {!showEmailInput ? (
-          <button
-            onClick={handleStartQuestClick}
-            className="start-quest-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
-          >
-            Start Quest
-          </button>
-        ) : (
-          <form onSubmit={handleSubmitEmail} className="email-form flex flex-col items-center w-full">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="email-input w-full p-3 mb-4 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+        {/* Conditional rendering based on emailSubmitted state */}
+        {!emailSubmitted ? (
+          !showEmailInput ? (
             <button
-              type="submit"
-              className="join-button bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50"
+              onClick={handleStartQuestClick}
+              className="start-quest-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
             >
-              Join Early Access
+              Start Quest
             </button>
-          </form>
-        )}
+          ) : (
+            <form onSubmit={handleSubmitEmail} className="email-form flex flex-col items-center w-full">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="email-input w-full p-3 mb-4 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <button
+                type="submit"
+                className="join-button bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50"
+              >
+                Join Early Access
+              </button>
+            </form>
+          )
+        ) : null /* If emailSubmitted is true, render nothing here, only the message below */}
 
         {message && (
           <p className="message mt-6 text-lg animate-fade-in-up">
