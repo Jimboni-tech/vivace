@@ -45,8 +45,8 @@ body {
 /* Adjust app-container padding for very small screens to ensure no overflow */
 @media (max-width: 480px) {
   .app-container {
-    padding: 0.5rem;
-    /* Reduce padding further on very small screens */
+    padding: 1rem;
+    /* Increased from 0.5rem to 1rem */
   }
 }
 
@@ -392,16 +392,13 @@ body {
 @keyframes float {
   0% {
     transform: translateY(0px) scale(1);
-    /* Start at original position */
   }
 
   50% {
     transform: translateY(-8px) scale(1.02);
-    /* Float up slightly and scale a bit */
   }
 
   100% {
     transform: translateY(0px) scale(1);
-    /* Return to original position */
   }
 }
